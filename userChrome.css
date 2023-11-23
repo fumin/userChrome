@@ -1,0 +1,33 @@
+/**
+ * Remove native top tab bar, since we are using Sidebery.
+ */
+#TabsToolbar{
+	visibility: collapse !important;
+}
+
+/**
+ * Decrease size of the sidebar header
+ */
+#sidebar-header {
+	height: 40px;
+	visibility: hidden;
+}
+#sidebar-box {
+	min-width: 100px !important;
+}
+
+/* "Auto-hide" address bar unless focused (e.g. Ctrl-L) or tab bar is hovered. */
+:root {
+    --address-bar-height: 0px;
+    --browser-offset: calc(-1 * (var(--address-bar-height) + 0px));
+}
+#navigator-toolbox-background {
+	position: absolute !important;
+}
+#navigator-toolbox-background ~ #browser {
+	margin-top: var(--browser-offset) !important;
+}
+#navigator-toolbox-background:hover, #navigator-toolbox-background:focus-within {
+	z-index: 9001 !important;
+	width: 100%;
+}
