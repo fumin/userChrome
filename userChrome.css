@@ -6,7 +6,8 @@
 }
 
 /**
- * Decrease size of the sidebar header
+ * These belong to the Sidebery plugin.
+ * Make height of sidebar header the same as the navigator-toolbox.
  */
 #sidebar-header {
 	height: 40px;
@@ -16,17 +17,24 @@
 	min-width: 100px !important;
 }
 
-/* "Auto-hide" address bar unless focused (e.g. Ctrl-L) or tab bar is hovered. */
+/*
+ * "Auto-hide" address bar unless focused (e.g. Ctrl-L) or tab bar is hovered.
+ */
+/* Hide address bar. */
 :root {
     --address-bar-height: 0px;
     --browser-offset: calc(-1 * (var(--address-bar-height) + 0px));
 }
+/* Even after hiding, the address bar still takes up space. Remove this unneeded space. */
 #navigator-toolbox{
 	position: absolute !important;
 }
-#navigator-toolbox ~ #browser {
-	margin-top: var(--browser-offset) !important;
-}
+/* Show buttons even if address bar is hidden.
+ * This is to allow hovering over these buttons to show the rest of the address bar. */
+#nav-bar-customization-target > .chromeclass-toolbar-additional:nth-child(-n+4 of :not([hidden])) {
+	z-index: 9001 !important;
+ }
+/* Hover to show address bar. */
 #navigator-toolbox:hover, #navigator-toolbox:focus-within {
 	z-index: 9001 !important;
 	width: 100%;
