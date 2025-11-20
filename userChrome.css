@@ -1,41 +1,28 @@
-/**
- * Remove native top tab bar, since we are using Sidebery.
- */
-#TabsToolbar{
-	visibility: collapse !important;
+/* Firefox version 145.0.1 */
+
+/* Decrease tab heights to fit in more vertical tabs. */
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+	--tab-min-height: 22px !important;
 }
 
-/**
- * These belong to the Sidebery plugin.
- * Make height of sidebar header the same as the navigator-toolbox.
- */
-#sidebar-header {
-	height: 40px;
-	visibility: hidden;
+/* Expand page content to fill height. */
+#tabbrowser-tabbox {
+	top: -40px;
+	height: calc(100% + 40px);
 }
-#sidebar-box {
-	min-width: 100px !important;
+/* Hide urlbar since it blocks the expanded page content. */
+#urlbar {
+	top: -40px !important;
 }
 
-/*
- * "Auto-hide" address bar unless focused (e.g. Ctrl-L) or tab bar is hovered.
- */
-/* Hide address bar. */
-:root {
-    --address-bar-height: 0px;
-    --browser-offset: calc(-1 * (var(--address-bar-height) + 0px));
-}
-/* Even after hiding, the address bar still takes up space. Remove this unneeded space. */
-#navigator-toolbox{
-	position: absolute !important;
-}
-/* Show buttons even if address bar is hidden.
- * This is to allow hovering over these buttons to show the rest of the address bar. */
-#nav-bar-customization-target > .chromeclass-toolbar-additional:nth-child(-n+4 of :not([hidden])) {
+/* Show navigator-toolbox when hovered. */
+#navigator-toolbox:hover,
+#navigator-toolbox:focus-within,
+#mainPopupSet:hover ~ #navigator-toolbox {
 	z-index: 9001 !important;
- }
-/* Hover to show address bar. */
-#navigator-toolbox:hover, #navigator-toolbox:focus-within {
-	z-index: 9001 !important;
-	width: 100%;
+}
+#navigator-toolbox:hover #urlbar,
+#navigator-toolbox:focus-within #urlbar,
+#mainPopupSet:hover ~ #navigator-toolbox #urlbar {
+	top: 4px !important;
 }
